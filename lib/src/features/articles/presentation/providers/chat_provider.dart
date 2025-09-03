@@ -4,6 +4,7 @@ import 'package:yes_no_app/src/features/articles/domain/entities/message_entity.
 import '../../../../core/helpers/get_yes_no_answer.dart';
 
 class ChatProvider extends ChangeNotifier {
+  
   final ScrollController scrollController = ScrollController();
   final GetYesNoAnswer getYesNoAnswer = GetYesNoAnswer();
 
@@ -18,6 +19,7 @@ class ChatProvider extends ChangeNotifier {
     if (message.isEmpty) return;
 
     final newMessage = MessageEntity(fromWho: FromWho.mio, text: message);
+
     messageList.add(newMessage);
     notifyListeners();
     moveScrollToBottom();
@@ -29,7 +31,9 @@ class ChatProvider extends ChangeNotifier {
   }
 
   Future<void> moveScrollToBottom() async {
+
     await Future.delayed(Duration(milliseconds: 100));
+
     scrollController.animateTo(
       scrollController.position.maxScrollExtent,
       duration: Duration(milliseconds: 200),
@@ -38,7 +42,9 @@ class ChatProvider extends ChangeNotifier {
   }
 
   Future<void> yourReply() async {
+
     final answer = await getYesNoAnswer.getAnswer();
+
     messageList.add(answer);
     notifyListeners();
     moveScrollToBottom();
