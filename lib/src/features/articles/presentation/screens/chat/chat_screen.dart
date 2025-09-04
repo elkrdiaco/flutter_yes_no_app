@@ -13,24 +13,28 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 5,
-        leading: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Material(
-            elevation: 3,
-            borderRadius: BorderRadius.circular(100),
-            shadowColor: Colors.grey,
-            child: const CircleAvatar(
-              radius: 30,
-              backgroundImage: NetworkImage(
-                'https://media.istockphoto.com/id/1389348844/photo/studio-shot-of-a-beautiful-young-woman-smiling-while-standing-against-a-grey-background.jpg?s=612x612&w=0&k=20&c=anRTfD_CkOxRdyFtvsiPopOluzKbhBNEQdh4okZImQc=',
-              ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70),
+        child: AppBar(
+          elevation: 5,
+          leading: Container(
+            padding: EdgeInsets.all(5),
+            child: Material(
+              elevation: 2.0,
+              type: MaterialType.card,
+              borderRadius: BorderRadius.circular(50),
+              shadowColor: Colors.grey,
+              child: CircleAvatar(
+                  radius: 100,
+                  backgroundImage: NetworkImage(
+                    'https://media.istockphoto.com/id/1389348844/photo/studio-shot-of-a-beautiful-young-woman-smiling-while-standing-against-a-grey-background.jpg?s=612x612&w=0&k=20&c=anRTfD_CkOxRdyFtvsiPopOluzKbhBNEQdh4okZImQc=',
+                  ),
+                ),
             ),
           ),
+          title: Text('My Love ❤️'),
+          centerTitle: false,
         ),
-        title: const Text('My Love ❤️'),
-        centerTitle: false,
       ),
       body: _ChatView(),
     );
@@ -53,16 +57,15 @@ class _ChatView extends StatelessWidget {
                 itemCount: chatProvider.messageList.length,
                 itemBuilder: (context, index) {
                   final message = chatProvider.messageList[index];
-                  return
-                  (message.fromWho == FromWho.mio)
-                  ? MyMessageBubble(message: message)
-                  : YourMessageBubble(message: message);
+                  return (message.fromWho == FromWho.mio)
+                      ? MyMessageBubble(message: message)
+                      : YourMessageBubble(message: message);
                 },
               ),
             ),
-            MessageBoxSend(
-              onValue: chatProvider.sendMsg
-            )
+            SizedBox(height: 10),
+            MessageBoxSend(onValue: chatProvider.sendMsg),
+            SizedBox(height: 10),
           ],
         ),
       ),
