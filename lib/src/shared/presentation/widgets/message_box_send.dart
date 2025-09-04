@@ -13,6 +13,7 @@ class MessageBoxSend extends StatelessWidget {
     final outlineInputBorder = OutlineInputBorder(
       borderSide: BorderSide(color: colors.primary),
       borderRadius: BorderRadius.circular(50),
+      gapPadding: 4,
     );
 
     final decoration = InputDecoration(
